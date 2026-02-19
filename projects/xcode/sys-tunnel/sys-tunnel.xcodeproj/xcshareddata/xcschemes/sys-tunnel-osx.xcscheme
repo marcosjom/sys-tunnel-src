@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1410"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2CAB418629C2320600AB4077"
+               BuildableName = "sys-tunnel-osx"
+               BlueprintName = "sys-tunnel-osx"
+               ReferencedContainer = "container:sys-tunnel.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES"
+      viewDebuggingEnabled = "No">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2CAB418629C2320600AB4077"
+            BuildableName = "sys-tunnel-osx"
+            BlueprintName = "sys-tunnel-osx"
+            ReferencedContainer = "container:sys-tunnel.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-printArgs"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-help"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-secsRunAndExit"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "300"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-maxSecsWithoutConn"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "180"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-maxConnsAndExit"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "2"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-cfgStart"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-CAs"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-path"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/mortegam/Desktop/NIBSA_proyectos/CltMarcosOrtega/sys-tunnel/tunnel.db.explodesa.net.crt.der"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-pay64"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "MIID1DCCArwCCQCSh92PC9K2ADANBgkqhkiG9w0BAQsFADCBqzELMAkGA1UEBhMCTkkxEDAOBgNVBAgMB01hbmFndWExEDAOBgNVBAcMB01hbmFndWExFjAUBgNVBAoMDWV4cGxvZGVzYS5uZXQxGTAXBgNVBAsMEGRiLmV4cGxvZGVzYS5uZXQxIDAeBgNVBAMMF3R1bm5lbC5kYi5leHBsb2Rlc2EubmV0MSMwIQYJKoZIhvcNAQkBFhR2ZW50YXNAZXhwbG9kZXNhLm5ldDAeFw0yMzAzMTYyMzMyMzVaFw0zMzAzMTMyMzMyMzVaMIGrMQswCQYDVQQGEwJOSTEQMA4GA1UECAwHTWFuYWd1YTEQMA4GA1UEBwwHTWFuYWd1YTEWMBQGA1UECgwNZXhwbG9kZXNhLm5ldDEZMBcGA1UECwwQZGIuZXhwbG9kZXNhLm5ldDEgMB4GA1UEAwwXdHVubmVsLmRiLmV4cGxvZGVzYS5uZXQxIzAhBgkqhkiG9w0BCQEWFHZlbnRhc0BleHBsb2Rlc2EubmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2VVOe+g2ej+YMy4TKz7bnlYXCplk62yXFJH4lsr1XIS1tC/gWDBs2EBPoNdSnbmAWx6EJptiAzW85iWRDcvPCK0MBfE60hVha9GmleFnYc44b1nZQ0s+bwUvb6VS21D6VnIAheeyEkx1T0pJp8I19G0OW0WUlmITE/+LPbMqR7U8boak7Vx1Af0rMdFNdjFQ4b6oKeOpPar7NLvZ7ehmRfwY3WQZ49jmnQ21xIs9RAd3PBKzzoQefT/iSJpAsBNP+JDw/4V7kAptael7p07BPFGZfDgTD4v+znULCfT14pY6mHzJlkfYWHi56BzxsEK/PytpBk3dwCwR29n6A8poEQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCTZIo/5lMJN8Yblb6sZ9Hcf4lOb/CP2SF72l9YB+A6+q1Fbq8lE2CSEuQQZek1CwrCPHyaY2ucugXGDBCzunLhHR9wTw/IrNpSL/3cZUUb0R3tDJ6j89b92oNnuzivNgdgrAZjwm9bDcAOfuvZ1MnVM40sRc78V8M/3LVjQ7KiVJwTdzNu0xSkZUDG7Jmfx9trlw+07qqIaK3CkPR5XH7tU8Y8YKpf6fugpHYqlPfR1SqqLzujdNK6lP5LXNXR4fgBQfeqD1l7s+AyHeJF6P42DA8R7OCfj4c3bZDHuUX8jcrzzkQIDCrasVh4qcd71HkCo2vaIXe1NVM9+K1Lp1ja"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-port"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "3307"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-redir"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-server"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "db.explodesa.net"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-port"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "3307"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-layer"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "mask"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-mask"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-seed"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "200"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-port"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "8089"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-layer"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "mask"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-ssl"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-cert"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-source"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-key"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-pay64"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "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"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-pass"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "beQbzQGNhU3n6C"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-name"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "incomingSsl"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-mask"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-seed"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "99"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-redir"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-server"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "&quot;www.google.com.ni&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-port"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "443"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-layer"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "mask"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-mask"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-seed"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "199"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-io"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-redir"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-layer"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "mask"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-mask"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-seed"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "200"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-cfgEnd"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2CAB418629C2320600AB4077"
+            BuildableName = "sys-tunnel-osx"
+            BlueprintName = "sys-tunnel-osx"
+            ReferencedContainer = "container:sys-tunnel.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
