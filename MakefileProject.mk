@@ -13,10 +13,7 @@ NB_PROJECT_CXXFLAGS         := -fPIC -std=c++11
 
 NB_PROJECT_INCLUDES         := \
    include \
-   ../../../CltNicaraguaBinary/sys-nbframework/lib-nbframework-src/include \
-   ../../../CltNicaraguaBinary/sys-auframework/lib-auframework-src/include \
-   ../../../CltNicaraguaBinary/sys-auframework/lib-auframework-media-src/include \
-   ../../../CltNicaraguaBinary/sys-auframework/lib-auframework-app-src/include
+   ../../../CltNicaraguaBinary/sys-nbframework/sys-nbframework-src/include
 
 
 
@@ -54,13 +51,14 @@ NB_CODE_GRP_FLAGS_FORBIDDEN +=
 NB_CODE_GRP_FLAGS_ENABLES   += NB_LIB_SSL
 
 NB_CODE_GRP_SRCS            := \
-    src//core/TNCore.c \
-    src//core/TNLyrMask.c \
-    src//core/TNLyrSsl.c \
-    src//core/TNCorePort.c \
-    src//core/TNLyrSocket.c \
-    src//core/TNCoreCfg.c \
-    src//core/TNBuffs.c
+    src/core/TNBuffs.c \
+    src/core/TNCore.c \
+    src/core/TNCoreCfg.c \
+    src/core/TNCorePort.c \
+    src/core/TNLyrBase64.c \
+    src/core/TNLyrIO.c \
+    src/core/TNLyrMask.c \
+    src/core/TNLyrSsl.c
 
 $(eval $(call nbCall,nbBuildCodeGrpRules))
 
