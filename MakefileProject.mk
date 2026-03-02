@@ -7,13 +7,13 @@ $(eval $(call nbCall,nbInitProject))
 
 NB_PROJECT_NAME             := tunnel
 
-NB_PROJECT_CFLAGS           := -fPIC
+NB_PROJECT_CFLAGS           += -fPIC
 
-NB_PROJECT_CXXFLAGS         := -fPIC -std=c++11
+NB_PROJECT_CXXFLAGS         += -fPIC -std=c++11
 
-NB_PROJECT_INCLUDES         := \
+NB_PROJECT_INCLUDES         += \
    include \
-   ../../../CltNicaraguaBinary/sys-nbframework/sys-nbframework-src/include
+   ../../sys-nbframework/sys-nbframework-src/include
 
 
 
@@ -32,7 +32,7 @@ NB_TARGET_SUFIX             := .a
 
 NB_TARGET_TYPE              := static
 
-NB_TARGET_DEPENDS           := nbframework
+NB_TARGET_DEPENDS           += nbframework
 
 NB_TARGET_FLAGS_ENABLES     += NB_LIB_TUNNEL
 
@@ -50,7 +50,7 @@ NB_CODE_GRP_FLAGS_FORBIDDEN +=
 
 NB_CODE_GRP_FLAGS_ENABLES   += NB_LIB_SSL
 
-NB_CODE_GRP_SRCS            := \
+NB_CODE_GRP_SRCS            += \
     src/core/TNBuffs.c \
     src/core/TNCore.c \
     src/core/TNCoreCfg.c \
@@ -92,7 +92,7 @@ NB_TARGET_SUFIX             :=
 
 NB_TARGET_TYPE              := exe
 
-NB_TARGET_DEPENDS           := tunnel-core
+NB_TARGET_DEPENDS           += tunnel-core
 
 NB_TARGET_FLAGS_ENABLES     += NB_LIB_TUNNEL
 
@@ -129,7 +129,7 @@ NB_CODE_GRP_FLAGS_FORBIDDEN +=
 
 NB_CODE_GRP_FLAGS_ENABLES   += NB_LIB_TUNNEL
 
-NB_CODE_GRP_SRCS            := \
+NB_CODE_GRP_SRCS            += \
     src/main.c
 
 $(eval $(call nbCall,nbBuildCodeGrpRules))

@@ -97,7 +97,7 @@
 		2CAB418929C2320600AB4077 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../../src/main.c; sourceTree = SOURCE_ROOT; };
 		2CAB418F29C2327100AB4077 /* TNCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TNCore.h; path = ../../../include/core/TNCore.h; sourceTree = SOURCE_ROOT; };
 		2CAB419029C2329500AB4077 /* TNCore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = TNCore.c; path = ../../../src/core/TNCore.c; sourceTree = SOURCE_ROOT; };
-		2CAB419329C232BF00AB4077 /* nbframework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = nbframework.xcodeproj; path = "../../../../../../CltNicaraguaBinary/sys-nbframework/lib-nbframework-src/projects/xcode/nbframework/nbframework.xcodeproj"; sourceTree = "<group>"; };
+		2CAB419329C232BF00AB4077 /* nbframework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = nbframework.xcodeproj; path = "../../../../../sys-nbframework/sys-nbframework-src/projects/xcode/nbframework/nbframework.xcodeproj"; sourceTree = "<group>"; };
 		2CAB41A229C23A3200AB4077 /* TNCoreCfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TNCoreCfg.h; path = ../../../include/core/TNCoreCfg.h; sourceTree = SOURCE_ROOT; };
 		2CAB41A429C23A4100AB4077 /* TNCoreCfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TNCoreCfg.c; path = ../../../src/core/TNCoreCfg.c; sourceTree = SOURCE_ROOT; };
 		2CAB41B129C3B82000AB4077 /* TNCorePort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TNCorePort.c; path = ../../../src/core/TNCorePort.c; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				USER_HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../../../../CltNicaraguaBinary/sys-nbframework/lib-nbframework-src/include",
+					"$(SRCROOT)/../../../../../sys-nbframework/sys-nbframework-src/include",
 					"$(SRCROOT)/../../../include",
 				);
 			};
@@ -395,7 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				USER_HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../../../../CltNicaraguaBinary/sys-nbframework/lib-nbframework-src/include",
+					"$(SRCROOT)/../../../../../sys-nbframework/sys-nbframework-src/include",
 					"$(SRCROOT)/../../../include",
 				);
 			};

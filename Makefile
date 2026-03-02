@@ -6,13 +6,13 @@ NB_CFG_PRINT_INTERNALS := 0
 NB_CFG_PRINT_INFO      := 0
 
 #Import functions
-include ../../../CltNicaraguaBinary/sys-nbframework/sys-nbframework-src/MakefileFuncs.mk
+include ../../sys-nbframework/sys-nbframework-src/MakefileFuncs.mk
 
 #Init workspace
 $(eval $(call nbCall,nbInitWorkspace))
 
 #Import projects
-include ../../../CltNicaraguaBinary/sys-nbframework/sys-nbframework-src/MakefileProject.mk
+include ../../sys-nbframework/sys-nbframework-src/MakefileProject.mk
 
 #Project
 include MakefileProject.mk
