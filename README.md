@@ -14,7 +14,7 @@ Created by [Marcos Ortega](https://mortegam.com/). Built on top of [sys-nbframew
 - Client and/or server side certificate validation.
 - 8 bits masking.
 - compiled for Windows, Mac, Linux.
-- works as a program, a service/daemon or as a dll to be used by apps.
+- works as a command, a service/daemon or as a library to be used by your apps.
 
 # How to use
 
@@ -26,7 +26,7 @@ On your server:
 
 Run an instance listening to a port, inverting the layers defining on the clients and redirecting to your internal service's port.
 
-Both your client and service will communicate as if the traffic is plain and unencrypted, but the tunnel acts as an intermediary peer-to-peer encryption layer. Any attempt to communicate without a tunnel or a valid tunnel configuration will produce an invalida stream-of-octets at the server side.
+Both your client and service will communicate as if the traffic is plain and unencrypted, but the tunnel acts as an intermediary peer-to-peer encryption layer. Any attempt to communicate without a tunnel or a valid tunnel configuration will produce an invalid stream-of-octets for the server.
 
 # How to compile
 
@@ -40,8 +40,6 @@ For simplicity, create this folder structure:
 
 You can create your own folders structure but it will require to update some paths in the projects and scripts.
 
-Follow the instructions in the `sys-nbframework-src/ext/*_howToBuild.txt` files to download the source of third-party embedded libraries. Optionally, these libraries can be dynamically linked to the ones installed in the operating system.
-
 The following steps will create an executable file.
 
 ## Windows
@@ -50,6 +48,20 @@ Open `projects/visual-studio/sys-tunnel.sln` and compile the desired target.
 
 ## MacOS
 
+In a terminal:
+
+```
+brew install openssl zlib lz4 
+```
+
+To build:
+
+```
+make tunnel-server NB_LIB_SSL_SYSTEM=1 NB_LIB_LZ4_SYSTEM=1 NB_LIB_Z_SYSTEM=1 LDFLAGS="-L/opt/homebrew/lib/" CFLAGS="-I/opt/homebrew/include/" CPPFLAGS="-I/opt/homebrew/include/"
+```
+
+Or: 
+
 Open `projects/xcode/sys-tunnel.xcworkspace` and compile the desired target.
 
 ## Linux and Others
@@ -57,18 +69,24 @@ Open `projects/xcode/sys-tunnel.xcworkspace` and compile the desired target.
 In a terminal:
 
 ```
-cd sys-tunnel-src
-make tunnel-server
+sudo apt install libssl-dev libz-dev liblz4-dev
 ```
 
-or
+To build:
 
 ```
 cd sys-tunnel-src
 make tunnel-server NB_LIB_SSL_SYSTEM=1 NB_LIB_LZ4_SYSTEM=1 NB_LIB_Z_SYSTEM=1
 ```
 
-The first `make` command will embed the dependencies into the executable from its source. The second will link to the libraries installed on the current system.
+or
+
+```
+cd sys-tunnel-src
+make tunnel-server
+```
+
+The first `make` command will link to the static libraries installed on the system. The second will embed the dependencies into the executable from its source. 
 
 Check each project's `Makefile` and `MakefileProject.mk` files, and the [MakefileFuncs.mk](https://github.com/marcosjom/makefile-like-IDE) to understand the `make` process, including the accepted flags and targets.
 
