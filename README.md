@@ -52,11 +52,6 @@ In a terminal:
 
 ```
 brew install openssl zlib lz4 
-```
-
-To build:
-
-```
 make tunnel-server NB_LIB_SSL_SYSTEM=1 NB_LIB_LZ4_SYSTEM=1 NB_LIB_Z_SYSTEM=1 LDFLAGS="-L/opt/homebrew/lib/" CFLAGS="-I/opt/homebrew/include/" CPPFLAGS="-I/opt/homebrew/include/"
 ```
 
@@ -70,11 +65,7 @@ In a terminal:
 
 ```
 sudo apt install libssl-dev libz-dev liblz4-dev
-```
 
-To build:
-
-```
 cd sys-tunnel-src
 make tunnel-server NB_LIB_SSL_SYSTEM=1 NB_LIB_LZ4_SYSTEM=1 NB_LIB_Z_SYSTEM=1
 ```
