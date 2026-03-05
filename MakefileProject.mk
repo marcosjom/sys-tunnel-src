@@ -56,6 +56,7 @@ NB_CODE_GRP_SRCS            += \
     src/core/TNCoreCfg.c \
     src/core/TNCorePort.c \
     src/core/TNLyrBase64.c \
+    src/core/TNLyrDump.c \
     src/core/TNLyrIO.c \
     src/core/TNLyrMask.c \
     src/core/TNLyrSsl.c

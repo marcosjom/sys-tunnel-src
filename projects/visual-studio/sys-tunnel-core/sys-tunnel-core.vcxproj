@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\..\include\core\TNCorePort.h" />
     <ClInclude Include="..\..\..\include\core\TNLyrBase.h" />
     <ClInclude Include="..\..\..\include\core\TNLyrBase64.h" />
+    <ClInclude Include="..\..\..\include\core\TNLyrDump.h" />
     <ClInclude Include="..\..\..\include\core\TNLyrIO.h" />
     <ClInclude Include="..\..\..\include\core\TNLyrMask.h" />
     <ClInclude Include="..\..\..\include\core\TNLyrSsl.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="..\..\..\src\core\TNCoreCfg.c" />
     <ClCompile Include="..\..\..\src\core\TNCorePort.c" />
     <ClCompile Include="..\..\..\src\core\TNLyrBase64.c" />
+    <ClCompile Include="..\..\..\src\core\TNLyrDump.c" />
     <ClCompile Include="..\..\..\src\core\TNLyrIO.c" />
     <ClCompile Include="..\..\..\src\core\TNLyrMask.c" />
     <ClCompile Include="..\..\..\src\core\TNLyrSsl.c" />
@@ -115,7 +117,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\..\CltNicaraguaBinary\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -135,7 +137,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\..\CltNicaraguaBinary\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -155,7 +157,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\..\CltNicaraguaBinary\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -175,7 +177,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\..\CltNicaraguaBinary\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\..\..\sys-nbframework\sys-nbframework-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>

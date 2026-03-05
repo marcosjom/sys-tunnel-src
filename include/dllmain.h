@@ -34,7 +34,7 @@ extern "C" {
 	/*
 	* {
 	*    "port": number
-	*    , "layers": [string, ...] ("ssl", "mask", "base64", ...)
+	*    , "layers": [string, ...] ("ssl", "mask", "base64", "dump", ...)
 	*    , "ssl": {
 	*       "cert": {
 	*          "isRequested": bool
@@ -54,10 +54,13 @@ extern "C" {
 	*    , "mask": {
 	*       "seed": number-0-255
 	*    }
+    *    , "dump": {
+    *       "pathPrefix": "./folder/namePrefix_"
+    *    }
 	*    , "redir": {
 	*       , "server": string
 	*       , "port": number
-	*       , "layers": [string, ...] ("ssl", "mask", "base64", ...)
+	*       , "layers": [string, ...] ("ssl", "mask", "base64", "dump", ...)
 	*       , "ssl": {
 	*          "cert": {
 	*             "isRequested": bool
@@ -77,6 +80,9 @@ extern "C" {
 	*       , "mask": {
 	*          "seed": number-0-255
 	*       }
+    *       , "dump": {
+    *          "pathPrefix": "./folder/namePrefix_"
+    *       }
 	*    }
 	* }
 	*/

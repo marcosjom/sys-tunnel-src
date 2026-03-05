@@ -20,6 +20,7 @@
 #include "core/TNLyrIO.h"
 #include "core/TNLyrMask.h"
 #include "core/TNLyrBase64.h"
+#include "core/TNLyrDump.h"
 
 //TNCoreArgs
 
@@ -78,7 +79,7 @@ typedef struct STTNCoreOpq_ {
 } STTNCoreOpq;
 
 //
-BOOL TNCore_prepareLyrsinvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg, STNBArray* dst /*STTNLyrLstnr*/);
+BOOL TNCore_prepareLyrsInvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg, STNBArray* dst /*STTNLyrLstnr*/);
 BOOL TNCore_portConnArrivedOpq_(STTNCorePortRef ref, STNBSocketRef socket, const STTNCoreCfgPort* cfg, STNBSslContextRef sslCtx, const STNBX509* sslCAs, const UI32 sslCAsSz, STNBSslContextRef redirSslCtx, const STNBX509* redirSslCAs, const UI32 redirSslCAsSz, void* usrParam);
 
 //
@@ -488,6 +489,54 @@ BOOL TNCore_parseArgsCfg_(const int argc, const char* argv[], STTNCoreCfg* dst, 
                         }
                         i++;
                     }
+                } else if(NBString_strIsLike(arg, "-pathPrefix")){
+                    //-pathPrefix
+                    if((i + 1) >= argc){
+                        if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                        NBString_concat(&errsLst, "Param '"); NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' without value.");
+                    } else {
+                        const char* vStr = argv[i + 1];
+                        if(vStr[0] == '\0'){
+                            if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                            NBString_concat(&errsLst, "Param '"); NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' value is empty.");
+                        } else {
+                            if(NBString_startsWith(&path, "/port/redir/dump")){
+                                if(dst->portsSz > 0){
+                                    STTNCoreCfgPort* p = &dst->ports[dst->portsSz - 1];
+                                    NBString_strFreeAndNewBuffer(&p->redir.dump.pathPrefix, vStr);
+                                } else {
+                                    if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                                    NBString_concat(&errsLst, "Internal error, empty port-list.");
+                                }
+                            } else if(NBString_startsWith(&path, "/port/dump")){
+                                if(dst->portsSz > 0){
+                                    STTNCoreCfgPort* p = &dst->ports[dst->portsSz - 1];
+                                    NBString_strFreeAndNewBuffer(&p->dump.pathPrefix, vStr);
+                                } else {
+                                    if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                                    NBString_concat(&errsLst, "Internal error, empty port-list.");
+                                }
+                            } else if(NBString_startsWith(&path, "/io/redir/dump")){
+                                if(dst->io != NULL){
+                                    NBString_strFreeAndNewBuffer(&dst->io->redir.dump.pathPrefix, vStr);
+                                } else {
+                                    if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                                    NBString_concat(&errsLst, "Internal error, io not set yet.");
+                                }
+                            } else if(NBString_startsWith(&path, "/io/dump")){
+                                if(dst->io != NULL){
+                                    NBString_strFreeAndNewBuffer(&dst->io->dump.pathPrefix, vStr);
+                                } else {
+                                    if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                                    NBString_concat(&errsLst, "Internal error, io not set yet.");
+                                }
+                            } else {
+                                if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                                NBString_concat(&errsLst, "Unexpected '"); NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' param.");
+                            }
+                        }
+                        i++;
+                    }
                 } else if(NBString_strIsLike(arg, "-layer")){
                     if((i + 1) >= argc){
                         if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
@@ -495,7 +544,13 @@ BOOL TNCore_parseArgsCfg_(const int argc, const char* argv[], STTNCoreCfg* dst, 
                     } else {
                         const char* vStr = argv[i + 1];
                         //ToDo: implement a centralized-list of supported layer's names.
-                        if(!NBString_strIsLike(vStr, "mask") && !NBString_strIsLike(vStr, "ssl") && !NBString_strIsLike(vStr, "base64")){
+                        if(
+                           !NBString_strIsLike(vStr, "mask") &&
+                           !NBString_strIsLike(vStr, "ssl") &&
+                           !NBString_strIsLike(vStr, "base64") &&
+                           !NBString_strIsLike(vStr, "dump")
+                           )
+                        {
                             if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
                             NBString_concat(&errsLst, "Unexpected '"); NBString_concat(&errsLst, vStr); NBString_concat(&errsLst, "' value for '");
                             NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' param.");
@@ -633,6 +688,19 @@ BOOL TNCore_parseArgsCfg_(const int argc, const char* argv[], STTNCoreCfg* dst, 
                         NBString_set(&path, "/io/redir/mask");
                     } else if(NBString_startsWith(&path, "/io")){
                         NBString_set(&path, "/io/mask");
+                    } else {
+                        if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
+                        NBString_concat(&errsLst, "Unexpected '"); NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' param.");
+                    }
+                } else if(NBString_strIsLike(arg, "-dump")){
+                    if(NBString_startsWith(&path, "/port/redir")){
+                        NBString_set(&path, "/port/redir/dump");
+                    } else if(NBString_startsWith(&path, "/port")){
+                        NBString_set(&path, "/port/dump");
+                    } else if(NBString_startsWith(&path, "/io/redir")){
+                        NBString_set(&path, "/io/redir/dump");
+                    } else if(NBString_startsWith(&path, "/io")){
+                        NBString_set(&path, "/io/dump");
                     } else {
                         if(errsLst.length != 0) NBString_concatByte(&errsLst, '\n');
                         NBString_concat(&errsLst, "Unexpected '"); NBString_concat(&errsLst, arg); NBString_concat(&errsLst, "' param.");
@@ -991,6 +1059,8 @@ BOOL TNCore_concatArsgHelp(const char* exeFilename, STNBString* dst){
         NBString_concat(dst, " |  |  | -pay64 [base64], adds one CA certificate to the inSsl list.\n");
         NBString_concat(dst, " | -mask, following params are applied to inMasking context.\n");
         NBString_concat(dst, " |  | -seed [0-255], inMask seed value.\n");
+        NBString_concat(dst, " | -dump, following params are applied to inDumping context.\n");
+        NBString_concat(dst, " |  | -pathprefix [path], inDumping path value.\n");
         NBString_concat(dst, " | -redir, following params are applied to redirection of port's conns.\n");
         NBString_concat(dst, " |  | -server [server], defines the destination server.\n");
         NBString_concat(dst, " |  | -port [number], defines the destination port.\n");
@@ -1008,6 +1078,8 @@ BOOL TNCore_concatArsgHelp(const char* exeFilename, STNBString* dst){
         NBString_concat(dst, " |  |  |  | -pay64 [base64], adds one CA certificate to the outSsl list.\n");
         NBString_concat(dst, " |  | -mask, following params are applied to outMasking context.\n");
         NBString_concat(dst, " |  |  | -seed, outMask seed value.\n");
+        NBString_concat(dst, " |  | -dump, following params are applied to outDumping context.\n");
+        NBString_concat(dst, " |  |  | -pathPrefix [path], outDumping path value.\n");
         NBString_concat(dst, "-io, enables stdin/stdout processing, following params are applied to this io.\n");
         NBString_concat(dst, " | -layer [mask|ssl|base64], adds a layer to the stdin.\n");
         NBString_concat(dst, " | -ssl, following params are applied to stdin context.\n");
@@ -1022,6 +1094,8 @@ BOOL TNCore_concatArsgHelp(const char* exeFilename, STNBString* dst){
         NBString_concat(dst, " |  |  |  |  | -name [name], defines an internal friendly name for the stdin-key-file.\n");
         NBString_concat(dst, " | -mask, following params are applied to stdinMasking context.\n");
         NBString_concat(dst, " |  | -seed [0-255], stdinMask seed value.\n");
+        NBString_concat(dst, " | -dump, following params are applied to stdinDumping context.\n");
+        NBString_concat(dst, " |  | -pathPrefix [path], stdinDumping path value.\n");
         NBString_concat(dst, " | -redir, following params are applied to redirection to stdout.\n");
         NBString_concat(dst, " |  | -layer [mask|ssl|base64], adds a layer to the stdout.\n");
         NBString_concat(dst, " |  | -ssl, following params are applied to stdout context.\n");
@@ -1034,6 +1108,8 @@ BOOL TNCore_concatArsgHelp(const char* exeFilename, STNBString* dst){
         NBString_concat(dst, " |  |  |  |  |  | -name [name], defines an internal friendly name for the stdout-key-file.\n");
         NBString_concat(dst, " |  | -mask, following params are applied to stdoutMasking context.\n");
         NBString_concat(dst, " |  |  | -seed, stdoutMask seed value.\n");
+        NBString_concat(dst, " |  | -dump, following params are applied to stdoutDumping context.\n");
+        NBString_concat(dst, " |  |  | -pathPrefix [path], stdoutDumping path value.\n");
         NBString_concat(dst, "-cfgEnd, following params are parsed as non-cfg params.\n");
         NBString_concat(dst, "\n");
         //example
@@ -1515,7 +1591,7 @@ BOOL TNCore_addPorts(STTNCoreRef ref, const STTNCoreCfgPorts* cfg){
     return r;
 }
 
-BOOL TNCore_prepareLyrsinvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg, STNBArray* dst /*STTNLyrLstnr*/){
+BOOL TNCore_prepareLyrsInvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg, STNBArray* dst /*STTNLyrLstnr*/){
     BOOL r = TRUE;
     const SI32 szbefore = dst->use;
     //add redir layers (in inverse order)
@@ -1584,6 +1660,37 @@ BOOL TNCore_prepareLyrsinvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg
                 }
                 TNLyrBase64_release(&s);
                 TNLyrBase64_null(&s);
+            } else if(NBString_strIsLike(lyrType, "dump")){
+                STTNLyrLstnr lstnr;
+                STTNLyrDumpRef s = TNLyrDump_alloc(NULL);
+                NBMemory_setZeroSt(lstnr, STTNLyrLstnr);
+                if(!TNLyrDump_setParentStopFlag(s, &opq->stopFlag)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_setParentStopFlag failed for dump layer.\n");
+                    r = FALSE;
+                } else if(!TNLyrDump_getLyrItf(s, &lstnr)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_getLyrItf failed for dump layer.\n");
+                    r = FALSE;
+                } else if(!TNLyrDump_prepare(s, ENTNLyrFlow_FromLwr, cfg->dump.pathPrefix)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_start failed for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrRetain == NULL){
+                    PRINTF_ERROR("TNCore, lyrRetain method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrRelease == NULL){
+                    PRINTF_ERROR("TNCore, lyrRelease method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrSetNext == NULL){
+                    PRINTF_ERROR("TNCore, lyrSetNext method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrStart == NULL){
+                    PRINTF_ERROR("TNCore, lyrStart method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else {
+                    (*lstnr.itf.lyrRetain)(lstnr.usrParam);
+                    NBArray_addValue(dst, lstnr);
+                }
+                TNLyrDump_release(&s);
+                TNLyrDump_null(&s);
             } else {
                 //ToDo: implement "ssl"
                 PRINTF_ERROR("TNCore, unsuported layer '%s'.\n", lyrType);
@@ -1657,6 +1764,37 @@ BOOL TNCore_prepareLyrsinvOrderOpq_(STTNCoreOpq* opq, const STTNCoreCfgPort* cfg
                 }
                 TNLyrBase64_release(&s);
                 TNLyrBase64_null(&s);
+            } else if(NBString_strIsLike(lyrType, "dump")){
+                STTNLyrLstnr lstnr;
+                STTNLyrDumpRef s = TNLyrDump_alloc(NULL);
+                NBMemory_setZeroSt(lstnr, STTNLyrLstnr);
+                if(!TNLyrDump_setParentStopFlag(s, &opq->stopFlag)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_setParentStopFlag failed for dump layer.\n");
+                    r = FALSE;
+                } else if(!TNLyrDump_getLyrItf(s, &lstnr)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_getLyrItf failed for dump layer.\n");
+                    r = FALSE;
+                } else if(!TNLyrDump_prepare(s, ENTNLyrFlow_FromUp, cfg->dump.pathPrefix)){
+                    PRINTF_ERROR("TNCore, TNLyrDump_start failed for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrRetain == NULL){
+                    PRINTF_ERROR("TNCore, lyrRetain method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrRelease == NULL){
+                    PRINTF_ERROR("TNCore, lyrRelease method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrSetNext == NULL){
+                    PRINTF_ERROR("TNCore, lyrSetNext method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else if(lstnr.itf.lyrStart == NULL){
+                    PRINTF_ERROR("TNCore, lyrStart method is NULL for dump layer.\n");
+                    r = FALSE;
+                } else {
+                    (*lstnr.itf.lyrRetain)(lstnr.usrParam);
+                    NBArray_addValue(dst, lstnr);
+                }
+                TNLyrDump_release(&s);
+                TNLyrDump_null(&s);
             } else {
                 //ToDo: implement "ssl"
                 PRINTF_ERROR("TNCore, unsuported layer '%s'.\n", lyrType);
@@ -1703,7 +1841,7 @@ BOOL TNCore_startListening(STTNCoreRef ref){
             //Build layers-stack (in inverse order)
             {
                 const STTNCoreCfgPort* cfg = opq->args.cfg.io;
-                if(!TNCore_prepareLyrsinvOrderOpq_(opq, cfg, &lstnrs)){
+                if(!TNCore_prepareLyrsInvOrderOpq_(opq, cfg, &lstnrs)){
                     r = FALSE;
                 } else {
                     //stdout
@@ -2019,7 +2157,7 @@ BOOL TNCore_portConnArrivedOpq_(STTNCorePortRef ref, STNBSocketRef socket, const
             r = TRUE;
             //Build layers-stack (in inverse order)
             {
-                if(!TNCore_prepareLyrsinvOrderOpq_(opq, cfg, &lstnrs)){
+                if(!TNCore_prepareLyrsInvOrderOpq_(opq, cfg, &lstnrs)){
                     r = FALSE;
                 } else {
                     //out-socket

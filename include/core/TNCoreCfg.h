@@ -64,6 +64,14 @@ typedef struct STTNCoreCfgMask_ {
 
 const STNBStructMap* TNCoreCfgMask_getSharedStructMap(void);
 
+//TNCoreCfgDump
+
+typedef struct STTNCoreCfgDump_ {
+    char*                   pathPrefix;
+} STTNCoreCfgDump;
+
+const STNBStructMap* TNCoreCfgDump_getSharedStructMap(void);
+
 //TNCoreCfgRedir
 
 typedef struct STTNCoreCfgRedir_ {
@@ -73,6 +81,7 @@ typedef struct STTNCoreCfgRedir_ {
     UI32                layersSz;   //
     STTNCoreCfgSsl      ssl;        //used only if there is a 'ssl' value in 'layers'.
     STTNCoreCfgMask     mask;       //used only if there is a 'mask' value in 'layers'.
+    STTNCoreCfgDump     dump;       //used only if there is a 'dump' value in 'layers'.
 } STTNCoreCfgRedir;
 
 const STNBStructMap* TNCoreCfgRedir_getSharedStructMap(void);
@@ -85,6 +94,7 @@ typedef struct STTNCoreCfgPort_ {
     UI32                    layersSz;   //
     STTNCoreCfgSsl          ssl;        //used only if there is a 'ssl' value in 'layers'.
     STTNCoreCfgMask         mask;       //used only if there is a 'mask' value in 'layers'.
+    STTNCoreCfgDump         dump;       //used only if there is a 'dump' value in 'layers'.
     STTNCoreCfgRedir        redir;
 } STTNCoreCfgPort;
 
