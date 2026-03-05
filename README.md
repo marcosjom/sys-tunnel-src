@@ -3,17 +3,19 @@ This repository was moved to Github. My original repository has >4 years of acti
 
 # sys-tunnel-src
 
-This is a TCP-tunnel for encryption and obfuscation.
+This is a TCP-tunnel for encryption, obfuscation and traffic capture.
 
 Created by [Marcos Ortega](https://mortegam.com/). Built on top of [sys-nbframework-src](https://github.com/marcosjom/sys-nbframework-src).
 
 # Features
 
+- IO-events based (one or few threads do the work)
 - TCP support.
 - SSL/TLS encryption layer.
 - Client and/or server side certificate validation.
 - 8 bits masking.
-- compiled for Windows, Mac, Linux.
+- in/out traffic dump (one file per connection's traffic flow).
+- for Windows, Mac and Linux.
 - works as a command, a service/daemon or as a library to be used by your apps.
 
 # How to use
@@ -120,6 +122,8 @@ Config params:
  |  |  | -pay64 [base64], adds one CA certificate to the inSsl list.
  | -mask, following params are applied to inMasking context.
  |  | -seed [0-255], inMask seed value.
+ | -dump, following params are applied to inDumping context.
+ |  | -pathPrefix [path], inDumping path value.
  | -redir, following params are applied to redirection of port's conns.
  |  | -server [server], defines the destination server.
  |  | -port [number], defines the destination port.
@@ -137,6 +141,8 @@ Config params:
  |  |  |  | -pay64 [base64], adds one CA certificate to the outSsl list.
  |  | -mask, following params are applied to outMasking context.
  |  |  | -seed, outMask seed value.
+ |  | -dump, following params are applied to outDumping context.
+ |  |  | -pathPrefix, outDumping path value.
 -io, enables stdin/stdout processing, following params are applied to this io.
  | -layer [mask|ssl|base64], adds a layer to the stdin.
  | -ssl, following params are applied to stdin context.
@@ -151,6 +157,8 @@ Config params:
  |  |  |  |  | -name [name], defines an internal friendly name for the stdin-key-file.
  | -mask, following params are applied to stdinMasking context.
  |  | -seed [0-255], stdinMask seed value.
+ | -dump, following params are applied to stdinDumping context.
+ |  | -pathPrefix [path], stdinDumping path value.
  | -redir, following params are applied to redirection to stdout.
  |  | -layer [mask|ssl|base64], adds a layer to the stdout.
  |  | -ssl, following params are applied to stdout context.
@@ -163,22 +171,29 @@ Config params:
  |  |  |  |  |  | -name [name], defines an internal friendly name for the stdout-key-file.
  |  | -mask, following params are applied to stdoutMasking context.
  |  |  | -seed, stdoutMask seed value.
+ |  | -dump, following params are applied to stdoutDumping context.
+ |  |  | -pathPrefix, stdoutDumping path value.
 -cfgEnd, following params are parsed as non-cfg params.
 ```
 
 Examples:
 
-This command opens a port 8089 for masking and redirecting to port 8090:
+This command listens on port 1234 for redirecting traffic to remote.com:1234 while dumping to files:
+```
+tunnel-server -cfgStart -port 1234 -layer dump -dump -pathPrefix myFolder/filePrefix -redir -server remote.com -port 1234 -cfgEnd
+```
+
+This command listens on port 8089 for masking and redirecting to port 8090:
 ```
 tunnel-server -cfgStart -port 8089 -redir -server localhost -port 8090 -layer mask -mask -seed 99 -cfgEnd
 ```
 
-This command opens a port 8090 for unmasking and redirecting to port google:443:
+This command listens on port 8090 for unmasking and redirecting to port google:443:
 ```
 tunnel-server -maxConnsAndExit 1 -cfgStart -port 8090 -layer mask -mask -seed 99 -redir -server www.google.com.ni -port 443
 ```
 
-This command opens a port 8089 for ssl-encryption, masking, and redirecting to port 8090:
+This command listens on port 8089 for ssl-encryption, masking, and redirecting to port 8090:
 ```
 tunnel-server -cfgStart -CAs -path file.cert -path "file 2.cert" -port 8089 -redir -server "remote.com" -port 8090 -layer ssl -layer mask -ssl -cert -source -path "file 3.cert" -key -path "file 4.key" -CAs -path "file 5.cert" -cfgEnd
 ```

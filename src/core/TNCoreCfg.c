@@ -104,6 +104,23 @@ const STNBStructMap* TNCoreCfgMask_getSharedStructMap(void){
     return TNCoreCfgMask_sharedStructMap.map;
 }
 
+//TNCoreCfgDump
+
+STNBStructMapsRec TNCoreCfgDump_sharedStructMap = STNBStructMapsRec_empty;
+
+const STNBStructMap* TNCoreCfgDump_getSharedStructMap(void){
+    NBMngrStructMaps_lock(&TNCoreCfgDump_sharedStructMap);
+    if(TNCoreCfgDump_sharedStructMap.map == NULL){
+        STTNCoreCfgDump s;
+        STNBStructMap* map = NBMngrStructMaps_allocTypeM(STTNCoreCfgDump);
+        NBStructMap_init(map, sizeof(s));
+        NBStructMap_addStrPtrM(map, s, pathPrefix);
+        TNCoreCfgDump_sharedStructMap.map = map;
+    }
+    NBMngrStructMaps_unlock(&TNCoreCfgDump_sharedStructMap);
+    return TNCoreCfgDump_sharedStructMap.map;
+}
+
 //TNCoreCfgRedir
 
 STNBStructMapsRec TNCoreCfgRedir_sharedStructMap = STNBStructMapsRec_empty;
@@ -119,6 +136,7 @@ const STNBStructMap* TNCoreCfgRedir_getSharedStructMap(void){
         NBStructMap_addPtrToArrayOfStrPtrM(map, s, layers, layersSz, ENNBStructMapSign_Unsigned);
         NBStructMap_addStructM(map, s, ssl, TNCoreCfgSsl_getSharedStructMap());
         NBStructMap_addStructM(map, s, mask, TNCoreCfgMask_getSharedStructMap());
+        NBStructMap_addStructM(map, s, dump, TNCoreCfgDump_getSharedStructMap());
         TNCoreCfgRedir_sharedStructMap.map = map;
     }
     NBMngrStructMaps_unlock(&TNCoreCfgRedir_sharedStructMap);
@@ -139,6 +157,7 @@ const STNBStructMap* TNCoreCfgPort_getSharedStructMap(void){
         NBStructMap_addPtrToArrayOfStrPtrM(map, s, layers, layersSz, ENNBStructMapSign_Unsigned);
         NBStructMap_addStructM(map, s, ssl, TNCoreCfgSsl_getSharedStructMap());
         NBStructMap_addStructM(map, s, mask, TNCoreCfgMask_getSharedStructMap());
+        NBStructMap_addStructM(map, s, dump, TNCoreCfgDump_getSharedStructMap());
         NBStructMap_addStructM(map, s, redir, TNCoreCfgRedir_getSharedStructMap());
         TNCoreCfgPort_sharedStructMap.map = map;
     }

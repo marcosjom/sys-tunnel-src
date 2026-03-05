@@ -77,8 +77,10 @@ extern "C" {
     //io
 #   define  TNBuffs_canConsume(PTR)     ((PTR)->read != NULL && (PTR)->read->csmd < (PTR)->read->filled)
 #   define  TNBuffs_canFill(PTR)        ((PTR)->fill != NULL && (PTR)->fill->filled < (PTR)->fill->size)
-#   define  TNBuffs_canConsumeSz(PTR, SZ)     ((PTR)->read != NULL && ((PTR)->read->csmd + (SZ)) <= (PTR)->read->filled)
-#   define  TNBuffs_canFillSz(PTR, SZ)        ((PTR)->fill != NULL && ((PTR)->fill->filled + (SZ)) <= (PTR)->fill->size)
+#   define  TNBuffs_canConsumeSz(PTR, SZ) ((PTR)->read != NULL && ((PTR)->read->csmd + (SZ)) <= (PTR)->read->filled)
+#   define  TNBuffs_canFillSz(PTR, SZ)  ((PTR)->fill != NULL && ((PTR)->fill->filled + (SZ)) <= (PTR)->fill->size)
+#   define  TNBuffs_csmAvailSz(PTR)     ((PTR)->read != NULL ? ((PTR)->read->filled - (PTR)->read->csmd) : 0ULL)
+#   define  TNBuffs_fillAvailSz(PTR)    ((PTR)->fill != NULL ? ((PTR)->fill->size - (PTR)->fill->filled) : 0ULL)
     SI32 TNBuffs_consume(STTNBuffs* obj, void* dst, const SI32 dstSz);      //read buffer and move csm-cursor
     SI32 TNBuffs_fill(STTNBuffs* obj, const void* src, const SI32 srcSz);   //write buffer and move fill-cursor
     void TNBuffs_moveCsmCursor(STTNBuffs* obj, const SI32 moveSz);

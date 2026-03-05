@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencie
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sys-tunnel-dll", "sys-tunnel-dll\sys-tunnel-dll.vcxproj", "{72BC0115-8959-4BC6-9D2C-21620EADD330}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nbframework", "..\..\..\..\..\CltNicaraguaBinary\sys-nbframework\sys-nbframework-src\projects\visual-studio\nbframework\nbframework.vcxproj", "{7FDDBC68-B369-4346-BA6E-7C1CE2FF732F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nbframework", "..\..\..\..\sys-nbframework\sys-nbframework-src\projects\visual-studio\nbframework\nbframework.vcxproj", "{7FDDBC68-B369-4346-BA6E-7C1CE2FF732F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
